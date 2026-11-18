@@ -1,0 +1,177 @@
+# Deep Learning PR 2 — Adult Income Classification using ANN
+
+## Project Overview
+
+This project uses an Artificial Neural Network (ANN) to predict whether an individual's annual income exceeds $50K using the Adult Income (Census Income) dataset.
+
+**Institute:** Red & White Skill Education  
+**Subject:** Deep Learning  
+**Project:** PR 2  
+**Task:** Binary Classification  
+**Framework:** TensorFlow 2.x / Keras  
+**Language:** Python
+
+## Dataset
+
+- **Dataset:** Adult Income Dataset (Census Income)
+- **Source:** UCI Machine Learning Repository
+- **UCI URL:** https://archive.ics.uci.edu/dataset/2/adult
+- **Kaggle URL:** https://www.kaggle.com/datasets/wenruliu/adult-income-dataset
+- **Target:** `income`
+- **Classes:** `<=50K` and `>50K`
+
+The target column is encoded as:
+- `<=50K` = 0
+- `>50K` = 1
+
+## Project Objectives
+
+The objective is to build and evaluate ANN models and study the impact of activation functions, weight initialisation, loss functions, Batch Normalization and optimizers on binary classification performance.
+
+## Data Preprocessing
+
+The following preprocessing steps were performed:
+
+1. Loaded the Adult Income dataset using Pandas.
+2. Removed extra whitespace from string columns.
+3. Replaced `?` values with missing values (`NaN`).
+4. Dropped rows containing missing values, as specified in the project instructions.
+5. Dropped `fnlwgt` and `education` columns while retaining `education.num`.
+6. Encoded the target column `income` into 0 and 1.
+7. Applied One-Hot Encoding using `pd.get_dummies(drop_first=True)`.
+8. Applied StandardScaler to numeric columns only.
+9. Split the data into training and testing sets using stratified 80/20 splitting.
+
+## Deep Learning Tasks
+
+### Task 1 — Data Preprocessing and EDA
+
+Loaded and cleaned the Adult Income dataset, handled missing values, encoded categorical features, scaled numeric features and performed exploratory data analysis.
+
+### Task 2 — MLP Architecture: Baseline ANN
+
+Created a reusable `build_ann()` function and trained a baseline ANN with two hidden layers and a sigmoid output layer.
+
+### Task 3 — Activation Functions
+
+Compared ReLU, Tanh, Sigmoid and ELU activation functions. Investigated dead neurons and gradient behaviour.
+
+### Task 4 — Weight Initialisation
+
+Compared Glorot Uniform, Glorot Normal, He Uniform, He Normal and Zeros initialisation methods.
+
+### Task 5 — Loss Functions
+
+Compared Binary Cross-Entropy, Mean Squared Error, Weighted Binary Cross-Entropy and Focal Loss, focusing on minority-class performance.
+
+### Task 6 — Batch Normalization
+
+Compared ANN models with and without Batch Normalization, tested BatchNorm placement and inspected learned gamma and beta parameters.
+
+### Task 7 — Optimizers and Final Comparison
+
+Compared SGD, SGD with Momentum, RMSprop and Adam. Performed learning-rate sensitivity experiments, trained the final combined ANN and evaluated model performance using classification metrics and ROC curves.
+
+## Reusable ANN Function — build_ann()
+
+The project uses a reusable function to maintain a consistent model architecture across experiments.
+
+| Parameter | Description |
+|---|---|
+| `input_dim` | Number of input features |
+| `hidden_units` | Number of neurons in hidden layers; default `[128, 64]` |
+| `activation` | Hidden-layer activation function |
+| `initializer` | Weight initialisation method |
+| `use_batch_norm` | Enables or disables Batch Normalization |
+| `optimizer` | Optimizer used for model training |
+| `loss` | Loss function used for model training |
+
+## Repository Structure
+
+```text
+DL_PR2_Adult_Income_ANN/
+│
+├── DL_PR2.ipynb
+├── DL_PR2.html
+├── README.md
+├── requirements.txt
+│
+└── plots/
+    ├── eda_class_balance.png
+    ├── activation_comparison.png
+    ├── initialiser_convergence.png
+    ├── weight_distributions.png
+    ├── loss_f1_comparison.png
+    ├── batchnorm_dynamics.png
+    ├── optimiser_convergence.png
+    ├── roc_curves.png
+    └── results_table.png
+```
+
+## Visual Results
+
+The `plots/` folder contains the important figures generated during the experiments.
+
+| Figure | Description |
+|---|---|
+| `eda_class_balance.png` | Income class distribution |
+| `activation_comparison.png` | Validation accuracy comparison of activation functions |
+| `initialiser_convergence.png` | Weight initialisation convergence comparison |
+| `weight_distributions.png` | Weight distributions before and after training |
+| `loss_f1_comparison.png` | Loss function and class-1 F1 comparison |
+| `batchnorm_dynamics.png` | BatchNorm versus baseline training dynamics |
+| `optimiser_convergence.png` | Optimizer validation accuracy comparison |
+| `roc_curves.png` | ROC curves for selected models |
+| `results_table.png` | Final model comparison table |
+
+## Final Model Results
+
+The following table contains the test-set results of the evaluated models. Replace the placeholders with the actual values generated by the notebook.
+
+| Model | Accuracy | Precision | Recall | F1-score | ROC-AUC | BatchNorm | Optimizer |
+|---|---:|---:|---:|---:|---:|---|---|
+| Baseline | — | — | — | — | — | No | Adam |
+| Best Activation | — | — | — | — | — | No | Adam |
+| Best Initialiser | — | — | — | — | — | No | Adam |
+| Weighted BCE | — | — | — | — | — | No | Adam |
+| Focal Loss | — | — | — | — | — | No | Adam |
+| BatchNorm | — | — | — | — | — | Yes | Adam |
+| Final Combined | — | — | — | — | — | Yes | Adam |
+
+**Note:** The F1-score is reported for class 1 (`>50K`). The highest F1-score and ROC-AUC should be identified from the actual test results.
+
+## Video Demonstration
+
+**Project Video:** [Add your Google Drive or Unlisted YouTube link here]
+
+## Tools and Technologies
+
+- Python 3.x
+- TensorFlow 2.x
+- Keras
+- Scikit-learn
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+- Git and GitHub
+
+## How to Run
+
+1. Clone or download this repository.
+2. Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Download `adult.csv` from the dataset source.
+4. Open `DL_PR2.ipynb` in Jupyter Notebook.
+5. Run the notebook cells in order.
+
+## Author
+
+**Name:** Add your name  
+**Institute:** Red & White Skill Education  
+**Project:** Deep Learning PR 2
